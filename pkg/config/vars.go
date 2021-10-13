@@ -287,6 +287,15 @@ var configVars = map[string]configVar{
 			EnvVar: "STORAGE_TIMESTAMP_TOLERANCE",
 		},
 	},
+	"storage.mysql.dsn": {
+		Type:    stringType,
+		Default: "",
+		CLIFlag: cli.StringFlag{
+			Name:   "storage-mysql-dsn",
+			Usage:  "mysql dsn, eg: root:longicorn@tcp(127.0.0.1:3306)/chartmuseum?charset=utf8mb4&parseTime=True&loc=Local ",
+			EnvVar: "STORAGE_MYSQL_DSN",
+		},
+	},
 	"storage.local.rootdir": {
 		Type:    stringType,
 		Default: "",

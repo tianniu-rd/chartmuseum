@@ -141,6 +141,8 @@ func backendFromConfig(conf *config.Config) storage.Backend {
 		backend = tencentBackendFromConfig(conf)
 	case "netease":
 		backend = neteaseBackendFromConfig(conf)
+	case "mysql":
+		backend = mysqlBackendFromConfig(conf)
 	default:
 		crash("Unsupported storage backend: ", storageFlag)
 	}
@@ -271,6 +273,15 @@ func neteaseBackendFromConfig(conf *config.Config) storage.Backend {
 	)
 }
 
+func mysqlBackendFromConfig(conf *config.Config) storage.Backend {
+	crashIfConfigMissingVars(conf, []string{"storage.mysql.dsn"})
+	backend, err := storage.NewMysqlBackend(conf.GetString("storage.mysql.dsn"))
+	if err != nil {
+		crash("failed to init mysqlBackend: err=%v", err)
+	}
+	return backend
+}
+
 func storeFromConfig(conf *config.Config) cache.Store {
 	if conf.GetString("cache.store") == "" {
 		return nil
@@ -303,6 +314,7 @@ func crashIfConfigMissingVars(conf *config.Config, vars []string) {
 	for _, v := range vars {
 		if conf.GetString(v) == "" {
 			flag := config.GetCLIFlagFromVarName(v)
+			fmt.Println(v)
 			missing = append(missing, fmt.Sprintf("--%s", flag))
 		}
 	}
