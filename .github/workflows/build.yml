@@ -43,13 +43,13 @@ jobs:
           echo ::set-output name=buildx_args::--platform ${DOCKER_PLATFORMS} \
             --build-arg revision=$(git rev-parse --short HEAD) \
             ${TAGS} .
-      - name: Release artifacts
-        id: release-artifacts
-        env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
-        run: |
-          VERSION="${{ steps.prepare.outputs.version }}" ./scripts/release-artifacts.sh
+#      - name: Release artifacts
+#        id: release-artifacts
+#        env:
+#          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+#          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+#        run: |
+#          VERSION="${{ steps.prepare.outputs.version }}" ./scripts/release-artifacts.sh
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
