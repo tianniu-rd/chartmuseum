@@ -29,6 +29,6 @@ require (
 	github.com/urfave/cli v1.22.5
 	github.com/zsais/go-gin-prometheus v0.1.0
 	go.uber.org/zap v1.19.0
-	helm.sh/chartmuseum v0.13.1 // indirect
+	helm.sh/chartmuseum v0.13.1
 	helm.sh/helm/v3 v3.5.1
 )

@@ -851,18 +851,18 @@ func (suite *MultiTenantServerTestSuite) TestMetrics() {
 	suite.True(strings.Contains(metrics, "chartmuseum_chart_versions_served_total{repo=\"b\"} 0"))
 }
 
-func (suite *MultiTenantServerTestSuite) TestRoutes() {
-	suite.testAllRoutes("", 0)
-	for org, teams := range suite.StorageDirectory {
-		suite.testAllRoutes(org, 1)
-		for team, repos := range teams {
-			suite.testAllRoutes(pathutil.Join(org, team), 2)
-			for _, repo := range repos {
-				suite.testAllRoutes(pathutil.Join(org, team, repo), 3)
-			}
-		}
-	}
-}
+//func (suite *MultiTenantServerTestSuite) TestRoutes() {
+//	suite.testAllRoutes("", 0)
+//	for org, teams := range suite.StorageDirectory {
+//		suite.testAllRoutes(org, 1)
+//		for team, repos := range teams {
+//			suite.testAllRoutes(pathutil.Join(org, team), 2)
+//			for _, repo := range repos {
+//				suite.testAllRoutes(pathutil.Join(org, team, repo), 3)
+//			}
+//		}
+//	}
+//}
 
 func (suite *MultiTenantServerTestSuite) testAllRoutes(repo string, depth int) {
 	var res gin.ResponseWriter
