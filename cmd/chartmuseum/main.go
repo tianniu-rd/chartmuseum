@@ -143,6 +143,8 @@ func backendFromConfig(conf *config.Config) storage.Backend {
 		backend = neteaseBackendFromConfig(conf)
 	case "mysql":
 		backend = mysqlBackendFromConfig(conf)
+	case "sqlite":
+		backend = sqliteBackendFromConfig(conf)
 	default:
 		crash("Unsupported storage backend: ", storageFlag)
 	}
@@ -278,6 +280,15 @@ func mysqlBackendFromConfig(conf *config.Config) storage.Backend {
 	backend, err := storage.NewMysqlBackend(conf.GetString("storage.mysql.dsn"))
 	if err != nil {
 		crash("failed to init mysqlBackend: err=%v", err)
+	}
+	return backend
+}
+
+func sqliteBackendFromConfig(conf *config.Config) storage.Backend {
+	crashIfConfigMissingVars(conf, []string{"storage.sqlite.dsn"})
+	backend, err := storage.NewSqliteBackend(conf.GetString("storage.sqlite.dsn"))
+	if err != nil {
+		crash("failed to init sqliteBackend: err=%v", err)
 	}
 	return backend
 }
