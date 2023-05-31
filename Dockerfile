@@ -18,7 +18,9 @@ RUN CGO_ENABLED=0 GO111MODULE=on go build \
 
 # This will be the final image
 
-FROM alpine:latest
+FROM alpine:3.13
+
+RUN apk update &&     apk upgrade && apk upgrade --no-cache --available  
 
 RUN apk add --no-cache cifs-utils ca-certificates
 
