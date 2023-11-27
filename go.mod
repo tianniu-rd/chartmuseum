@@ -7,6 +7,7 @@ replace (
 	github.com/chartmuseum/storage => github.com/tianniu-rd/storage v0.11.3
 	github.com/docker/distribution => github.com/docker/distribution v0.0.0-20191216044856-a8371794149d
 	github.com/docker/docker => github.com/moby/moby v17.12.0-ce-rc1.0.20200618181300-9dc6525e6118+incompatible
+	github.com/emicklei/go-restful => github.com/emicklei/go-restful v2.16.0+incompatible
 	go.etcd.io/etcd => github.com/eddycjy/etcd v0.5.0-alpha.5.0.20200218102753-4258cdd2efdf
 	google.golang.org/grpc => google.golang.org/grpc v1.29.1
 	helm.sh/chartmuseum => ../chartmuseum
