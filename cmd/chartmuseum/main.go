@@ -135,8 +135,6 @@ func backendFromConfig(conf *config.Config) storage.Backend {
 		backend = openstackBackendFromConfig(conf)
 	case "baidu":
 		backend = baiduBackendFromConfig(conf)
-	case "etcd":
-		backend = etcdBackendFromConfig(conf)
 	case "tencent":
 		backend = tencentBackendFromConfig(conf)
 	case "netease":
@@ -240,20 +238,6 @@ func baiduBackendFromConfig(conf *config.Config) storage.Backend {
 		conf.GetString("storage.baidu.bucket"),
 		conf.GetString("storage.baidu.prefix"),
 		conf.GetString("storage.baidu.endpoint"),
-	)
-}
-
-func etcdBackendFromConfig(conf *config.Config) storage.Backend {
-	crashIfConfigMissingVars(conf, []string{"storage.etcd.cafile",
-		"storage.etcd.certfile",
-		"storage.etcd.keyfile",
-		"storage.etcd.prefix"})
-	return storage.NewEtcdCSBackend(
-		conf.GetString("storage.etcd.endpoint"),
-		conf.GetString("storage.etcd.cafile"),
-		conf.GetString("storage.etcd.certfile"),
-		conf.GetString("storage.etcd.keyfile"),
-		conf.GetString("storage.etcd.prefix"),
 	)
 }
 
